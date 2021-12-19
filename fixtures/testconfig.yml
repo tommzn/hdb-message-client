@@ -1,0 +1,4 @@
+
+log:
+  type: local
+  loglevel: debug

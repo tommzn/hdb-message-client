@@ -1,0 +1,15 @@
+
+log:
+  type: local
+  loglevel: debug
+
+hdb:
+  kafka:
+    servers: localhost
+    poll_sleep: 1s
+    fetch_timeout: 1s
+    subsriptions:
+      - topic: integration_test_topic
+        limit: "5"
+        datasource: exchangerate
+      
