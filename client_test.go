@@ -39,7 +39,7 @@ func (suite *ClientIntegrationTestSuite) SetupTest() {
 	suite.topic = "integration_test_topic"
 	suite.conf = loadConfigForTest(config.AsStringPtr("fixtures/testconfig2.yml"))
 	kafkaConfig := &kafka.ConfigMap{"bootstrap.servers": "localhost"}
-	if servers := suite.conf.Get("hdb.kafka.servers", nil); servers != nil {
+	if servers := suite.conf.Get("kafka.servers", nil); servers != nil {
 		kafkaConfig.SetKey("bootstrap.servers", *servers)
 	}
 	producer, err := kafka.NewProducer(kafkaConfig)

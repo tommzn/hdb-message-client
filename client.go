@@ -18,8 +18,8 @@ var ErrNoNewEvents = errors.New("No new events available")
 
 func New(conf config.Config, logger log.Logger) Client {
 
-	pollSleep := conf.GetAsDuration("hdb.kafka.poll_sleep", config.AsDurationPtr(10*time.Minute))
-	fetchTimeout := conf.GetAsDuration("hdb.kafka.fetch_timeout", config.AsDurationPtr(3*time.Second))
+	pollSleep := conf.GetAsDuration("kafka.poll_sleep", config.AsDurationPtr(10*time.Minute))
+	fetchTimeout := conf.GetAsDuration("kafka.fetch_timeout", config.AsDurationPtr(3*time.Second))
 	return &MessageClient{
 		logger:        logger,
 		pollSleep:     *pollSleep,

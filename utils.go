@@ -25,7 +25,7 @@ func randomId(length int) string {
 func getSubscriptions(conf config.Config) map[string]processConfig {
 
 	subscriptions := make(map[string]processConfig)
-	subsriptionConfig := conf.GetAsSliceOfMaps("hdb.kafka.subsriptions")
+	subsriptionConfig := conf.GetAsSliceOfMaps("kafka.subsriptions")
 	for _, subsription := range subsriptionConfig {
 		if topic, ok := subsription["topic"]; ok {
 			cfg := processConfig{
@@ -55,7 +55,7 @@ func newKafkaConfig(conf config.Config) *kafka.ConfigMap {
 		"group.id":          "hdb-message-client-" + randomId(4),
 		"auto.offset.reset": "earliest",
 	}
-	if servers := conf.Get("hdb.kafka.servers", nil); servers != nil {
+	if servers := conf.Get("kafka.servers", nil); servers != nil {
 		kafkaConfig.SetKey("bootstrap.servers", *servers)
 	}
 	return &kafkaConfig

@@ -3,15 +3,14 @@ log:
   type: local
   loglevel: debug
 
-hdb:
-  kafka:
-    servers: 1.2.3.4
-    subsriptions:
-      - topic: topic1
-      - topic: topic2
-        limit: "12"
-      - topic: Topic
-        limit: "3"
-        datasource: weather
-      - topic: topic4
-        limit: "0"
+kafka:
+  servers: 1.2.3.4
+  subsriptions:
+    - topic: topic1
+    - topic: topic2
+      limit: "12"
+    - topic: Topic
+      limit: "3"
+      datasource: weather
+    - topic: topic4
+      limit: "0"
