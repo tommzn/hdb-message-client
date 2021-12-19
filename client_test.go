@@ -164,6 +164,7 @@ func (suite *ClientIntegrationTestSuite) publishMessages(numberOfMessages int) {
 		}, nil)
 		suite.Nil(err)
 	}
+	suite.producer.Flush(15 * 1000)
 }
 
 func addEventsForTest(client Client) Client {
