@@ -57,21 +57,17 @@ func (suite *ClientTestSuite) TestGetLatest() {
 	client := clientForTest(nil)
 	addEventsForTest(client)
 
-	for i := 3; i > 0; i-- {
-		suite.Len(client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE], i)
-		latest, err := client.Latest(core.DATASOURCE_EXCHANGERATE)
-		suite.Nil(err)
-		suite.NotNil(latest)
-		exchangeRate, ok := latest.(*events.ExchangeRate)
-		suite.True(ok)
-		suite.Equal(float64(i), exchangeRate.Rate)
-	}
-	suite.Len(client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE], 0)
+	suite.Len(client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE], 3)
+	latest, err := client.Latest(core.DATASOURCE_EXCHANGERATE)
+	suite.Nil(err)
+	suite.NotNil(latest)
+	exchangeRate, ok := latest.(*events.ExchangeRate)
+	suite.True(ok)
+	suite.Equal(float64(3), exchangeRate.Rate)
 
-	latest, err := client.Latest(core.DATASOURCE_WEATHER)
-	suite.NotNil(err)
-	suite.Nil(latest)
-
+	latest2, err2 := client.Latest(core.DATASOURCE_BILLINGREPORT)
+	suite.NotNil(err2)
+	suite.Nil(latest2)
 }
 
 func (suite *ClientTestSuite) TestGetAll() {
@@ -83,10 +79,9 @@ func (suite *ClientTestSuite) TestGetAll() {
 	suite.Nil(err)
 	suite.Len(allEvents1, 3)
 
-	allEvents2, err := client.All(core.DATASOURCE_EXCHANGERATE)
-	suite.NotNil(err)
+	allEvents2, err2 := client.All(core.DATASOURCE_BILLINGREPORT)
+	suite.NotNil(err2)
 	suite.Len(allEvents2, 0)
-
 }
 
 func (suite *ClientTestSuite) TestRemoveOldEvents() {

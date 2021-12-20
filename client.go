@@ -115,9 +115,7 @@ func (client *MessageClient) removeOldEvents(cfg processConfig) {
 func (client *MessageClient) Latest(datasource core.DataSource) (proto.Message, error) {
 
 	if events, ok := client.events[datasource]; ok && len(events) > 0 {
-		event := events[len(events)-1]
-		client.events[datasource] = events[:len(events)-1]
-		return event, nil
+		return events[len(events)-1], nil
 	}
 	return nil, ErrNoNewEvents
 }
@@ -125,7 +123,6 @@ func (client *MessageClient) Latest(datasource core.DataSource) (proto.Message, 
 func (client *MessageClient) All(datasource core.DataSource) ([]proto.Message, error) {
 
 	if events, ok := client.events[datasource]; ok {
-		delete(client.events, datasource)
 		return events, nil
 	}
 	return []proto.Message{}, ErrNoNewEvents
