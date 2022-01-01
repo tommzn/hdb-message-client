@@ -156,10 +156,6 @@ func (suite *UtilsTestSuite) timestampEqual(expextec, curent *timestamppb.Timest
 	suite.Equal(expextec.AsTime().Format(time.RFC3339), curent.AsTime().Format(time.RFC3339))
 }
 
-func asTimeStamp(t time.Time) *timestamppb.Timestamp {
-	return timestamppb.New(t)
-}
-
 func contains(list []string, expectedElement string) bool {
 	for _, item := range list {
 		if item == expectedElement {

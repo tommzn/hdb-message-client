@@ -69,6 +69,15 @@ func topicsToSubscribe(subsriptions map[string]processConfig) []string {
 	return topics
 }
 
+func isInFilter(datasource core.DataSource, filter []core.DataSource) bool {
+	for _, filterDataSource := range filter {
+		if filterDataSource == datasource {
+			return true
+		}
+	}
+	return false
+}
+
 func toEvent(messageData []byte, datasource core.DataSource) (proto.Message, error) {
 
 	var event proto.Message

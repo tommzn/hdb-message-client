@@ -84,6 +84,35 @@ func (suite *ClientTestSuite) TestGetAll() {
 	suite.Len(allEvents2, 0)
 }
 
+func (suite *ClientTestSuite) TestObserve() {
+
+	client := clientForTest(nil)
+	evemtChan := client.Observe(nil)
+
+	addProcessedEventsForTest(client)
+	suite.True(len(evemtChan) == 3)
+	event := <-evemtChan
+	suite.NotNil(event)
+	exchangeRate, ok := event.(*events.ExchangeRate)
+	suite.True(ok)
+	suite.Equal(1.0, exchangeRate.Rate)
+
+	addProcessedEventsForTest(client)
+	addProcessedEventsForTest(client)
+	addProcessedEventsForTest(client)
+	suite.True(len(evemtChan) == 10)
+}
+
+func (suite *ClientTestSuite) TestObserveFiltered() {
+
+	client := clientForTest(nil)
+	filter := []core.DataSource{core.DATASOURCE_BILLINGREPORT}
+	evemtChan := client.Observe(&filter)
+
+	addProcessedEventsForTest(client)
+	suite.True(len(evemtChan) == 0)
+}
+
 func (suite *ClientTestSuite) TestRemoveOldEvents() {
 
 	client := clientForTest(nil)
@@ -174,5 +203,19 @@ func addEventsForTest(client Client) Client {
 	client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE] = append(client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE], exchangeRate1)
 	client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE] = append(client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE], exchangeRate2)
 	client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE] = append(client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE], exchangeRate3)
+	return client
+}
+
+func addProcessedEventsForTest(client Client) Client {
+
+	exchangeRate1 := exchangeRateForTest()
+	exchangeRate1.Rate = 1.0
+	exchangeRate2 := exchangeRateForTest()
+	exchangeRate2.Rate = 2.0
+	exchangeRate3 := exchangeRateForTest()
+	exchangeRate3.Rate = 3.0
+	client.(*MessageClient).appendToChannel(exchangeRate1, core.DATASOURCE_EXCHANGERATE)
+	client.(*MessageClient).appendToChannel(exchangeRate2, core.DATASOURCE_EXCHANGERATE)
+	client.(*MessageClient).appendToChannel(exchangeRate3, core.DATASOURCE_EXCHANGERATE)
 	return client
 }

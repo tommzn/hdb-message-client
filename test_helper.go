@@ -11,6 +11,7 @@ import (
 	config "github.com/tommzn/go-config"
 	log "github.com/tommzn/go-log"
 	events "github.com/tommzn/hdb-events-go"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func loadConfigForTest(fileName *string) config.Config {
@@ -79,4 +80,8 @@ func marshalProto(message proto.Message, assert *assert.Assertions) []byte {
 func waitFor(wg *sync.WaitGroup, waitChan chan struct{}) {
 	wg.Wait()
 	close(waitChan)
+}
+
+func asTimeStamp(t time.Time) *timestamppb.Timestamp {
+	return timestamppb.New(t)
 }

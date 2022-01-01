@@ -17,6 +17,8 @@ type MessageClient struct {
 	datasourceMap map[string]core.DataSource
 	fetchTimeout  time.Duration
 	kafkaConfig   *kafka.ConfigMap
+	eventChan     chan proto.Message
+	chanFilter    []core.DataSource
 }
 
 type processConfig struct {

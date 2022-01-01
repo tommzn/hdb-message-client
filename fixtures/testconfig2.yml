@@ -7,6 +7,7 @@ kafka:
   servers: localhost
   poll_sleep: 1s
   fetch_timeout: 1s
+  channel_size: 10
   subsriptions:
     - topic: integration_test_topic
       limit: "5"

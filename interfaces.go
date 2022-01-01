@@ -15,4 +15,7 @@ type Client interface {
 
 	// All returns all available message for given datasource.
 	All(core.DataSource) ([]proto.Message, error)
+
+	// Observe returns a channel clients can subsribe to get new messages.
+	Observe(*[]core.DataSource) <-chan proto.Message
 }
