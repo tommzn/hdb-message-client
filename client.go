@@ -23,13 +23,15 @@ func New(conf config.Config, logger log.Logger) Client {
 	pollSleep := conf.GetAsDuration("kafka.poll_sleep", config.AsDurationPtr(10*time.Minute))
 	fetchTimeout := conf.GetAsDuration("kafka.fetch_timeout", config.AsDurationPtr(3*time.Second))
 	channelSize := conf.GetAsInt("kafka.channel_size", config.AsIntPtr(10))
+	kafkaConfig := newKafkaConfig(conf)
+	logger.Debugf("Kafka Config: %+v", kafkaConfig)
 	return &MessageClient{
 		logger:        logger,
 		pollSleep:     *pollSleep,
 		events:        make(map[core.DataSource][]proto.Message),
 		subscriptions: getSubscriptions(conf),
 		fetchTimeout:  *fetchTimeout,
-		kafkaConfig:   newKafkaConfig(conf),
+		kafkaConfig:   kafkaConfig,
 		eventChan:     make(chan proto.Message, *channelSize),
 		chanFilter:    []core.DataSource{},
 	}
