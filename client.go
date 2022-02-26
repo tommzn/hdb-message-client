@@ -24,7 +24,8 @@ func New(conf config.Config, logger log.Logger) Client {
 	fetchTimeout := conf.GetAsDuration("kafka.fetch_timeout", config.AsDurationPtr(3*time.Second))
 	channelSize := conf.GetAsInt("kafka.channel_size", config.AsIntPtr(10))
 	kafkaConfig := newKafkaConfig(conf)
-	logger.Debugf("Kafka Config: %+v", kafkaConfig)
+	logger.Debugf("Kafka Config: %+v", *kafkaConfig)
+	logger.Flush()
 	return &MessageClient{
 		logger:        logger,
 		pollSleep:     *pollSleep,
