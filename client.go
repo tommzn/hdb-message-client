@@ -49,6 +49,7 @@ func (client *MessageClient) Run(ctx context.Context, waitGroup *sync.WaitGroup)
 
 		client.fetchMessages()
 		client.logger.Infof("Finish message receiving, sleep for %s.", client.pollSleep)
+		client.logger.Flush()
 
 		select {
 		case <-ctx.Done():
