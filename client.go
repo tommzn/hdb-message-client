@@ -24,8 +24,6 @@ func New(conf config.Config, logger log.Logger) Client {
 	fetchTimeout := conf.GetAsDuration("kafka.fetch_timeout", config.AsDurationPtr(3*time.Second))
 	channelSize := conf.GetAsInt("kafka.channel_size", config.AsIntPtr(10))
 	kafkaConfig := newKafkaConfig(conf)
-	logger.Debugf("Kafka Config: %+v", *kafkaConfig)
-	logger.Flush()
 	return &MessageClient{
 		logger:        logger,
 		pollSleep:     *pollSleep,
@@ -109,7 +107,9 @@ func (client *MessageClient) processMessage(message *kafka.Message) error {
 		return fmt.Errorf("No datasource for topics %s defined.", *topic)
 	}
 
+	client.logger.Debugf("Try to unmarshal message from %s, content: %s", message.Value, cfg.datasource)
 	event, err := toEvent(message.Value, cfg.datasource)
+	client.logger.Debugf("Get Event: %+v", event)
 	if err == nil {
 		client.events[cfg.datasource] = append(client.events[cfg.datasource], event)
 		client.removeOldEvents(cfg)
