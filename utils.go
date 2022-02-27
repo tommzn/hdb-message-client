@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math/rand"
 	"strconv"
+	"strings"
 
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/golang/protobuf/proto"
@@ -81,7 +82,8 @@ func isInFilter(datasource core.DataSource, filter []core.DataSource) bool {
 
 func toEvent(messageData []byte, datasource core.DataSource) (proto.Message, error) {
 
-	protoData, err := base64.StdEncoding.DecodeString(string(messageData))
+	stringData := strings.TrimSuffix(strings.TrimPrefix(string(messageData), "\""), "\"")
+	protoData, err := base64.StdEncoding.DecodeString(stringData)
 	if err != nil {
 		return nil, err
 	}
