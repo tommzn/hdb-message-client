@@ -108,6 +108,7 @@ func (client *MessageClient) processMessage(message *kafka.Message) error {
 	}
 
 	client.logger.Debugf("Try to unmarshal message from %s, content: %s", message.Value, cfg.datasource)
+
 	event, err := toEvent(message.Value, cfg.datasource)
 	client.logger.Debugf("Get Event: %+v", event)
 	if err == nil {
