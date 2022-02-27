@@ -112,13 +112,14 @@ func (client *MessageClient) processMessage(message *kafka.Message) error {
 		return fmt.Errorf("No datasource for topics %s defined.", *topic)
 	}
 
-	client.logger.Debugf("Try to unmarshal message from %s, content: %s", message.Value, cfg.datasource)
-
+	client.logger.Debugf("Try to unmarshal message from %s, content: %s", cfg.datasource, message.Value)
 	event, err := toEvent(message.Value, cfg.datasource)
-	client.logger.Debugf("Get Event: %+v", event)
 	if err == nil {
+		client.logger.Debugf("Get Event: %+v", event)
 		client.events[cfg.datasource] = append(client.events[cfg.datasource], event)
 		client.removeOldEvents(cfg)
+	} else {
+		client.logger.Error("Unable to unmarshal mesage, reason: ", err)
 	}
 	client.appendToChannel(event, cfg.datasource)
 	return err
