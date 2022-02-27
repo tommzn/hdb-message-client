@@ -1,6 +1,7 @@
 package client
 
 import (
+	"encoding/base64"
 	"fmt"
 	"math/rand"
 	"strconv"
@@ -80,6 +81,11 @@ func isInFilter(datasource core.DataSource, filter []core.DataSource) bool {
 
 func toEvent(messageData []byte, datasource core.DataSource) (proto.Message, error) {
 
+	protoData, err := base64.StdEncoding.DecodeString(string(messageData))
+	if err != nil {
+		return nil, err
+	}
+
 	var event proto.Message
 	switch datasource {
 	case core.DATASOURCE_BILLINGREPORT:
@@ -93,6 +99,6 @@ func toEvent(messageData []byte, datasource core.DataSource) (proto.Message, err
 	default:
 		return nil, fmt.Errorf("Unsupported datasource: %s", datasource)
 	}
-	err := proto.Unmarshal(messageData, event)
+	err = proto.Unmarshal(protoData, event)
 	return event, err
 }

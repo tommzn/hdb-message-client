@@ -1,6 +1,7 @@
 package client
 
 import (
+	"encoding/base64"
 	"sync"
 	"time"
 
@@ -62,7 +63,7 @@ func kafkaMessageForTest(topic *string, event proto.Message) *kafka.Message {
 			Metadata:  nil,
 			Error:     nil,
 		},
-		Value:         data,
+		Value:         []byte(base64.StdEncoding.EncodeToString(data)),
 		Key:           []byte("1"),
 		Timestamp:     time.Now(),
 		TimestampType: kafka.TimestampType(1),
@@ -74,7 +75,7 @@ func kafkaMessageForTest(topic *string, event proto.Message) *kafka.Message {
 func marshalProto(message proto.Message, assert *assert.Assertions) []byte {
 	data, err := proto.Marshal(message)
 	assert.Nil(err)
-	return data
+	return []byte(base64.StdEncoding.EncodeToString(data))
 }
 
 func waitFor(wg *sync.WaitGroup, waitChan chan struct{}) {
