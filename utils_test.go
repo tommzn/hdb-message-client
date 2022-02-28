@@ -101,6 +101,10 @@ func (suite *UtilsTestSuite) TestGenerateRandomId() {
 	id := randomId(length)
 	suite.NotNil(id)
 	suite.True(len(id) == length)
+
+	id2 := randomId(length)
+	suite.NotNil(id2)
+	suite.NotEqual(id, id2)
 }
 
 func (suite *UtilsTestSuite) TestGetTopicSubscriptions() {

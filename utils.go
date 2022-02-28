@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/golang/protobuf/proto"
@@ -17,6 +18,7 @@ import (
 const runes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 func randomId(length int) string {
+	rand.Seed(time.Now().UnixNano())
 	b := make([]byte, length)
 	for i := range b {
 		b[i] = runes[rand.Intn(len(runes))]
@@ -54,7 +56,7 @@ func newKafkaConfig(conf config.Config) *kafka.ConfigMap {
 
 	kafkaConfig := kafka.ConfigMap{
 		"bootstrap.servers": "localhost",
-		"group.id":          "hdb-message-client-" + randomId(4),
+		"group.id":          "hdb-message-client-" + randomId(6),
 		"auto.offset.reset": "earliest",
 	}
 	if servers := conf.Get("kafka.servers", nil); servers != nil {
