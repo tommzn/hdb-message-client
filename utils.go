@@ -99,7 +99,7 @@ func toEvent(messageData []byte, datasource core.DataSource) (proto.Message, err
 	case core.DATASOURCE_INDOORCLIMATE:
 		event = &events.IndoorClimate{}
 	case core.DATASOURCE_EXCHANGERATE:
-		event = &events.ExchangeRate{}
+		event = &events.ExchangeRates{}
 	default:
 		return nil, fmt.Errorf("Unsupported datasource: %s", datasource)
 	}
