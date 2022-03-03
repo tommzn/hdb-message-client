@@ -61,9 +61,9 @@ func (suite *ClientTestSuite) TestGetLatest() {
 	latest, err := client.Latest(core.DATASOURCE_EXCHANGERATE)
 	suite.Nil(err)
 	suite.NotNil(latest)
-	exchangeRate, ok := latest.(*events.ExchangeRate)
+	exchangeRate, ok := latest.(*events.ExchangeRates)
 	suite.True(ok)
-	suite.Equal(float64(3), exchangeRate.Rate)
+	suite.Equal(float64(3), exchangeRate.Rates[0].Rate)
 
 	latest2, err2 := client.Latest(core.DATASOURCE_BILLINGREPORT)
 	suite.NotNil(err2)
@@ -93,9 +93,9 @@ func (suite *ClientTestSuite) TestObserve() {
 	suite.True(len(evemtChan) == 3)
 	event := <-evemtChan
 	suite.NotNil(event)
-	exchangeRate, ok := event.(*events.ExchangeRate)
+	exchangeRate, ok := event.(*events.ExchangeRates)
 	suite.True(ok)
-	suite.Equal(1.0, exchangeRate.Rate)
+	suite.Equal(1.0, exchangeRate.Rates[0].Rate)
 
 	addProcessedEventsForTest(client)
 	addProcessedEventsForTest(client)
@@ -127,9 +127,9 @@ func (suite *ClientTestSuite) TestRemoveOldEvents() {
 	latest, err := client.Latest(core.DATASOURCE_EXCHANGERATE)
 	suite.Nil(err)
 	suite.NotNil(latest)
-	exchangeRate, ok := latest.(*events.ExchangeRate)
+	exchangeRate, ok := latest.(*events.ExchangeRates)
 	suite.True(ok)
-	suite.Equal(float64(3), exchangeRate.Rate)
+	suite.Equal(float64(3), exchangeRate.Rates[0].Rate)
 }
 
 func (suite *ClientTestSuite) TestProcessMessage() {
