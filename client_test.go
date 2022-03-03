@@ -194,11 +194,11 @@ func (suite *ClientIntegrationTestSuite) publishMessages(numberOfMessages int) {
 func addEventsForTest(client Client) Client {
 
 	exchangeRate1 := exchangeRateForTest()
-	exchangeRate1.Rate = 1.0
+	exchangeRate1.Rates[0].Rate = 1.0
 	exchangeRate2 := exchangeRateForTest()
-	exchangeRate2.Rate = 2.0
+	exchangeRate2.Rates[0].Rate = 2.0
 	exchangeRate3 := exchangeRateForTest()
-	exchangeRate3.Rate = 3.0
+	exchangeRate3.Rates[0].Rate = 3.0
 	client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE] = []proto.Message{}
 	client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE] = append(client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE], exchangeRate1)
 	client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE] = append(client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE], exchangeRate2)
@@ -209,11 +209,11 @@ func addEventsForTest(client Client) Client {
 func addProcessedEventsForTest(client Client) Client {
 
 	exchangeRate1 := exchangeRateForTest()
-	exchangeRate1.Rate = 1.0
+	exchangeRate1.Rates[0].Rate = 1.0
 	exchangeRate2 := exchangeRateForTest()
-	exchangeRate2.Rate = 2.0
+	exchangeRate2.Rates[0].Rate = 2.0
 	exchangeRate3 := exchangeRateForTest()
-	exchangeRate3.Rate = 3.0
+	exchangeRate3.Rates[0].Rate = 3.0
 	client.(*MessageClient).appendToChannel(exchangeRate1, core.DATASOURCE_EXCHANGERATE)
 	client.(*MessageClient).appendToChannel(exchangeRate2, core.DATASOURCE_EXCHANGERATE)
 	client.(*MessageClient).appendToChannel(exchangeRate3, core.DATASOURCE_EXCHANGERATE)

@@ -35,12 +35,16 @@ func clientForTest(configFile *string) Client {
 	return New(conf, loggerForTest())
 }
 
-func exchangeRateForTest() *events.ExchangeRate {
-	return &events.ExchangeRate{
-		FromCurrency: "USD",
-		ToCurrency:   "EUR",
-		Rate:         1.23445,
-		Timestamp:    asTimeStamp(time.Now()),
+func exchangeRateForTest() *events.ExchangeRates {
+	return &events.ExchangeRates{
+		Rates: []*events.ExchangeRate{
+			&events.ExchangeRate{
+				FromCurrency: "USD",
+				ToCurrency:   "EUR",
+				Rate:         1.23445,
+				Timestamp:    asTimeStamp(time.Now()),
+			},
+		},
 	}
 }
 

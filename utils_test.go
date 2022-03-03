@@ -25,11 +25,11 @@ func (suite *UtilsTestSuite) TestConvertToEvent() {
 	exchangeRateData := marshalProto(exchangeRate, suite.Assert())
 	event, err := toEvent(exchangeRateData, core.DATASOURCE_EXCHANGERATE)
 	suite.Nil(err)
-	exchangeRate2, ok := event.(*events.ExchangeRate)
+	exchangeRate2, ok := event.(*events.ExchangeRates)
 	suite.True(ok)
-	suite.Equal(exchangeRate.FromCurrency, exchangeRate2.FromCurrency)
-	suite.Equal(exchangeRate.Rate, exchangeRate2.Rate)
-	suite.timestampEqual(exchangeRate.Timestamp, exchangeRate2.Timestamp)
+	suite.Equal(exchangeRate.Rates[0].FromCurrency, exchangeRate2.Rates[0].FromCurrency)
+	suite.Equal(exchangeRate.Rates[0].Rate, exchangeRate2.Rates[0].Rate)
+	suite.timestampEqual(exchangeRate.Rates[0].Timestamp, exchangeRate2.Rates[0].Timestamp)
 
 	indoorClimate := &events.IndoorClimate{
 		DeviceId:  "e775bf78-1713-492b-8f07-cd853649073b",
