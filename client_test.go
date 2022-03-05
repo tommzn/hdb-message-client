@@ -3,6 +3,7 @@ package client
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/stretchr/testify/suite"
 	"sync"
 	"testing"
@@ -68,6 +69,8 @@ func (suite *ClientTestSuite) TestGetLatest() {
 	latest2, err2 := client.Latest(core.DATASOURCE_BILLINGREPORT)
 	suite.NotNil(err2)
 	suite.Nil(latest2)
+
+	fmt.Println(client.(*MessageClient).String())
 }
 
 func (suite *ClientTestSuite) TestGetAll() {

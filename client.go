@@ -176,3 +176,13 @@ func (client *MessageClient) Observe(filter *[]core.DataSource) <-chan proto.Mes
 	}
 	return client.eventChan
 }
+
+// String returns log information for current datasource.
+func (client *MessageClient) String() string {
+	eventStr := ""
+	for key, events := range client.events {
+		eventStr += fmt.Sprintf("%s:%d", key, len(events))
+	}
+	return fmt.Sprintf("PollSleep: %s\nFetchTimeout: %s\nKafka Config: %+v\nEvent-Chan: %d\nFilter: %+v\nSubsriptions: %+v\nEvents: %s\n",
+		client.pollSleep, client.fetchTimeout.String(), *client.kafkaConfig, len(client.eventChan), client.chanFilter, client.subscriptions, eventStr)
+}
