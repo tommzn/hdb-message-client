@@ -83,7 +83,7 @@ func (client *MessageClient) fetchMessages() {
 	consumer.SubscribeTopics(topics, nil)
 	for {
 
-		if msg, err := consumer.ReadMessage(client.fetchTimeout); err != nil {
+		if msg, err := consumer.ReadMessage(client.fetchTimeout); err == nil {
 			if err := client.processMessage(msg); err != nil {
 				client.logger.Error("Unable to process mesage, reason: ", err)
 			}
