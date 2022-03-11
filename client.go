@@ -83,19 +83,25 @@ func (client *MessageClient) fetchMessages() {
 	consumer.SubscribeTopics(topics, nil)
 	for {
 
-		msg, err := consumer.ReadMessage(client.fetchTimeout)
-		if err != nil {
-			if err.(kafka.Error).Code() == kafka.ErrTimedOut {
-				client.logger.Infof("No new messages received after %s, stop consuming.", client.fetchTimeout)
-			} else {
-				client.logger.Error("Unable to fetch messages, reason: ", err)
+		if msg, err := consumer.ReadMessage(client.fetchTimeout); err != nil {
+			if err := client.processMessage(msg); err != nil {
+				client.logger.Error("Unable to process mesage, reason: ", err)
 			}
+		} else {
+			client.logTopicReadError(err)
 			return
 		}
-
-		client.logger.Info("Message received from topic: ", *msg.TopicPartition.Topic)
-		client.processMessage(msg)
 	}
+}
+
+// LogTopicReadError writes log entry for passed error. In case of kafka.ErrTimedOut
+// log level will be info in all other cases it's error.
+func (client *MessageClient) logTopicReadError(err error) {
+	if err.(kafka.Error).Code() == kafka.ErrTimedOut {
+		client.logger.Infof("No new messages received after %s, stop consuming.", client.fetchTimeout)
+		return
+	}
+	client.logger.Error("Unable to fetch messages, reason: ", err)
 }
 
 // ProcessMessage will try to convert passed Kafka message into an event and appends it
@@ -112,16 +118,12 @@ func (client *MessageClient) processMessage(message *kafka.Message) error {
 		return fmt.Errorf("No datasource for topics %s defined.", *topic)
 	}
 
-	client.logger.Debugf("Try to unmarshal message from %s, content: %s", cfg.datasource, message.Value)
 	event, err := toEvent(message.Value, cfg.datasource)
 	if err == nil {
-		client.logger.Debugf("Get Event: %+v", event)
 		client.events[cfg.datasource] = append(client.events[cfg.datasource], event)
 		client.removeOldEvents(cfg)
-	} else {
-		client.logger.Error("Unable to unmarshal mesage, reason: ", err)
+		client.appendToChannel(event, cfg.datasource)
 	}
-	client.appendToChannel(event, cfg.datasource)
 	return err
 }
 
