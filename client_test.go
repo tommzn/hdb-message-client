@@ -116,6 +116,22 @@ func (suite *ClientTestSuite) TestObserveFiltered() {
 	suite.True(len(evemtChan) == 0)
 }
 
+func (suite *ClientTestSuite) TestReadyState() {
+
+	client := clientForTest(nil)
+	suite.False(client.IsReady())
+	addEventsForTest(client)
+	suite.True(client.IsReady())
+
+	filter := []core.DataSource{core.DATASOURCE_BILLINGREPORT}
+	client.Observe(&filter)
+	suite.False(client.IsReady())
+
+	filter2 := []core.DataSource{core.DATASOURCE_EXCHANGERATE}
+	client.Observe(&filter2)
+	suite.True(client.IsReady())
+}
+
 func (suite *ClientTestSuite) TestRemoveOldEvents() {
 
 	client := clientForTest(nil)

@@ -18,4 +18,8 @@ type Client interface {
 
 	// Observe returns a channel clients can subsribe to get new messages.
 	Observe(*[]core.DataSource) <-chan proto.Message
+
+	// IsReady will ensure at least one event in local storage. In case datasource
+	// filters are set it will ensure that there's one event for each datasource.
+	IsReady() bool
 }

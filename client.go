@@ -188,3 +188,18 @@ func (client *MessageClient) String() string {
 	return fmt.Sprintf("PollSleep: %s\nFetchTimeout: %s\nKafka Config: %+v\nEvent-Chan: %d\nFilter: %+v\nSubsriptions: %+v\nEvents: %s\n",
 		client.pollSleep, client.fetchTimeout.String(), *client.kafkaConfig, len(client.eventChan), client.chanFilter, client.subscriptions, eventStr)
 }
+
+// IsReady will ensure at least one event in local storage. In case datasource
+// filters are set it will ensure that there's one event for each datasource.
+func (client *MessageClient) IsReady() bool {
+	if len(client.chanFilter) > 0 {
+		for _, datasource := range client.chanFilter {
+			datasourceEvents, ok := client.events[datasource]
+			if !ok || len(datasourceEvents) == 0 {
+				return false
+			}
+		}
+		return true
+	}
+	return len(client.events) > 0
+}
