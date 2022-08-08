@@ -2,6 +2,7 @@ package client
 
 import (
 	"github.com/golang/protobuf/proto"
+	metrics "github.com/tommzn/go-metrics"
 	core "github.com/tommzn/hdb-core"
 )
 
@@ -22,4 +23,7 @@ type Client interface {
 	// IsReady will ensure at least one event in local storage. In case datasource
 	// filters are set it will ensure that there's one event for each datasource.
 	IsReady() bool
+
+	// Metrics returns stats of consumed topics and local message count.
+	Metrics() []metrics.Measurement
 }

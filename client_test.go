@@ -197,6 +197,15 @@ func (suite *ClientIntegrationTestSuite) TestCanelExecution() {
 	suite.Len(client.(*MessageClient).events[core.DATASOURCE_EXCHANGERATE], 5)
 }
 
+func (suite *ClientTestSuite) TestGetMetrics() {
+
+	client := clientForTest(nil)
+	addEventsForTest(client)
+
+	metrics := client.Metrics()
+	suite.Len(metrics, 1)
+}
+
 func (suite *ClientIntegrationTestSuite) publishMessages(numberOfMessages int) {
 
 	for i := 0; i < numberOfMessages; i++ {

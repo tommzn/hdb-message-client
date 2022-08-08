@@ -12,6 +12,7 @@ require (
 	github.com/stretchr/testify v1.7.0
 	github.com/tommzn/go-config v1.0.5
 	github.com/tommzn/go-log v1.1.0
+	github.com/tommzn/go-metrics v1.0.1 // indirect
 	github.com/tommzn/go-secrets v1.1.1 // indirect
 	github.com/tommzn/hdb-core v1.0.1
 	github.com/tommzn/hdb-events-go v1.0.8

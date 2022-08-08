@@ -67,6 +67,7 @@ github.com/aws/aws-sdk-go v1.38.14 h1:MpFh9HN9zJwdyRPSZQpZQDP/I1pqHlKhNLxRJsX5nl
 github.com/aws/aws-sdk-go v1.38.14/go.mod h1:hcU610XS61/+aQV88ixoOzUoG7v3b31pl2zKMmprdro=
 github.com/aws/aws-sdk-go v1.38.51 h1:aKQmbVbwOCuQSd8+fm/MR3bq0QOsu9Q7S+/QEND36oQ=
 github.com/aws/aws-sdk-go v1.38.51/go.mod h1:hcU610XS61/+aQV88ixoOzUoG7v3b31pl2zKMmprdro=
+github.com/aws/aws-sdk-go v1.42.30/go.mod h1:OGr6lGMAKGlG9CVrYnWYDKIyb829c6EVBRjxqjmPepc=
 github.com/aws/aws-sdk-go v1.43.7 h1:Gbs53KxXJWbO3txoVkevf56bhdDFqRisl7MQQ6581vc=
 github.com/aws/aws-sdk-go v1.43.7/go.mod h1:y4AeaBuwd2Lk+GepC1E9v0qOiTws0MIWAX4oIKwKHZo=
 github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973/go.mod h1:Dwedo/Wpr24TaqPxmxbtue+5NUziq4I4S80YR8gNf3Q=
@@ -365,6 +366,8 @@ github.com/rogpeppe/fastuuid v1.2.0/go.mod h1:jVj6XXZzXRy/MSR5jhDC/2q6DgLz+nrA6L
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
 github.com/ryanuber/columnize v0.0.0-20160712163229-9b3edd62028f/go.mod h1:sm1tb6uqfes/u+d4ooFouqFdy9/2g9QGwK3SQygK0Ts=
 github.com/sagikazarmark/crypt v0.4.0/go.mod h1:ALv2SRj7GxYV4HO9elxH9nS6M9gW+xDNxqmyJ6RfDFM=
+github.com/satori/go.uuid v1.2.0 h1:0uYX9dsZ2yD7q2RtLRtPSdGDWzjeM3TbMJP9utgA0ww=
+github.com/satori/go.uuid v1.2.0/go.mod h1:dA0hQrYB0VpLJoorglMZABFdXlWrHn1NEOzdhQKdks0=
 github.com/sean-/seed v0.0.0-20170313163322-e2103e2c3529/go.mod h1:DxrIzT+xaE7yg65j358z/aeFdxmN0P9QXhEzd20vsDc=
 github.com/sirupsen/logrus v1.2.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
 github.com/sirupsen/logrus v1.4.2/go.mod h1:tLMulIdttU9McNUspp0xgXVQah82FyeX6MwdIuYE2rE=
@@ -410,10 +413,14 @@ github.com/tommzn/go-config v1.0.5 h1:fhXq5rVvONUKDq/zmFvHWq2r/1CjaQ9WsYiHyOnvaD
 github.com/tommzn/go-config v1.0.5/go.mod h1:K+ta7gkX32lSS+6tIIH9ttuhr35tV4AMAzOC640aRKE=
 github.com/tommzn/go-log v1.1.0 h1:x4UQPH7sQznhWfz34WC8JKyFjkYmZT8ZHrcv+nfyI1c=
 github.com/tommzn/go-log v1.1.0/go.mod h1:xB+EJtRRPcR+4oeenhSvKKeNq4Mqr2GjHEz1lJtYDZo=
+github.com/tommzn/go-metrics v1.0.1 h1:1S+4A4FQ8D+ZoRojpWTzuryshOmJnAU2/+hj4b4nxQk=
+github.com/tommzn/go-metrics v1.0.1/go.mod h1:cGVgmVebHyXasXXTVax9RN9gGFxDQ79DtAPM9Ywbljw=
 github.com/tommzn/go-secrets v1.0.0 h1:TVDf0ky3gRX2QDCCPDXsyLdxQ/6gBxCSxbzgpv6Q0I0=
 github.com/tommzn/go-secrets v1.0.0/go.mod h1:ZCiO/36WGUEgk5K7+S3U/JKIp4ghe5OA2fkckVN32/8=
 github.com/tommzn/go-secrets v1.1.1 h1:Ss2LaKdQSMlO6Z180U9GJfitCsXxTdS/fXZUzXXx3zM=
 github.com/tommzn/go-secrets v1.1.1/go.mod h1:ZCiO/36WGUEgk5K7+S3U/JKIp4ghe5OA2fkckVN32/8=
+github.com/tommzn/go-utils v1.0.2 h1:OnUdCJC46ogBDNnt+zwG1bN/RyoYoeNWBvPTbBITIGo=
+github.com/tommzn/go-utils v1.0.2/go.mod h1:TaQQLOtzHNmRx+/WUHgyNYvsqUX1N0JJEePC8Pye0Ow=
 github.com/tommzn/hdb-core v1.0.1 h1:D+1/2CN+A7zt4cJ11JOGwSlEDa8OTDHfZzzFq0MzQY4=
 github.com/tommzn/hdb-core v1.0.1/go.mod h1:06kIRFbE7WrOZev4jtySE4d2fEMOv4lzHwg/n27vabk=
 github.com/tommzn/hdb-events-go v1.0.8 h1:v1j1+a5+J+Wd8QZIfqvquSPiyGX1AMPIA7hwFwoul7o=
@@ -535,6 +542,7 @@ golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4/go.mod h1:p54w0d4576C0XHj96b
 golang.org/x/net v0.0.0-20210410081132-afb366fc7cd1/go.mod h1:9tjilg8BloeKEkVJvy7fQ90B1CfIiPueXVOjqfkSzI8=
 golang.org/x/net v0.0.0-20210503060351-7fd8e65b6420/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
 golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
+golang.org/x/net v0.0.0-20211216030914-fe4d6282115f/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
 golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd/go.mod h1:CfG3xpIq0wQ8r1q4Su4UZFWDARRcnwPjda9FqA0JpMk=
 golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be/go.mod h1:N/0e6XlmueqKjAGxoOufVs8QHGRruUQn6yWY3a++T0U=
 golang.org/x/oauth2 v0.0.0-20190226205417-e64efc72b421/go.mod h1:gOpvHmFTYa4IltrdGE7lF6nIHvwfUNPOp7c8zoXwtLw=

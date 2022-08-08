@@ -11,6 +11,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	config "github.com/tommzn/go-config"
 	log "github.com/tommzn/go-log"
+	metrics "github.com/tommzn/go-metrics"
 	core "github.com/tommzn/hdb-core"
 )
 
@@ -202,4 +203,34 @@ func (client *MessageClient) IsReady() bool {
 		return true
 	}
 	return len(client.events) > 0
+}
+
+// Metrics returns count of messages for each available datasource.
+func (client *MessageClient) Metrics() []metrics.Measurement {
+
+	listOfMeasurements := []metrics.Measurement{}
+	for dataSource, messages := range client.events {
+		listOfMeasurements = append(listOfMeasurements, newMeasurement(dataSource, len(messages)))
+
+	}
+	return listOfMeasurements
+}
+
+// newMeasurement creates a new metrics for given datasource.
+func newMeasurement(dataSource core.DataSource, messageCount int) metrics.Measurement {
+	return metrics.Measurement{
+		MetricName: "hdb-message-client",
+		Tags: []metrics.MeasurementTag{
+			metrics.MeasurementTag{
+				Name:  "datasource",
+				Value: fmt.Sprintf("%s", dataSource),
+			},
+		},
+		Values: []metrics.MeasurementValue{
+			metrics.MeasurementValue{
+				Name:  "count",
+				Value: messageCount,
+			},
+		},
+	}
 }
