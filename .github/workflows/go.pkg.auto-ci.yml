@@ -5,11 +5,8 @@ on:
       - main
 jobs:
   test:
-    name: Go Tests
-    strategy:
-      matrix:
-        platform: [ubuntu-latest]
-    runs-on: ${{ matrix.platform }}
+    name: Go Message Client Tests
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -25,14 +22,8 @@ jobs:
         run: go test -v  -covermode=count ./...
         env:
           OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
-
+    
   release:
-    name: Go Package Release
+    uses:  tommzn/github-ci/.github/workflows/go.pkg.release.yml@v1.0.60
     needs: [test]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - uses: go-semantic-release/action@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+    
