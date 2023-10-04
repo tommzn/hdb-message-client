@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/confluentinc/confluent-kafka-go/v2 v2.2.0
 	github.com/stretchr/testify v1.8.4
-	github.com/tommzn/go-config v1.1.0
+	github.com/tommzn/go-config v1.2.0
 	github.com/tommzn/go-log v1.2.2
 	github.com/tommzn/go-metrics v1.0.1
 	github.com/tommzn/hdb-core v1.0.3
