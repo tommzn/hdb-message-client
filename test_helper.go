@@ -7,11 +7,11 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/confluentinc/confluent-kafka-go/kafka"
-	"github.com/golang/protobuf/proto"
+	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 	config "github.com/tommzn/go-config"
 	log "github.com/tommzn/go-log"
 	events "github.com/tommzn/hdb-events-go"
+	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 

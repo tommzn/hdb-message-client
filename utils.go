@@ -8,11 +8,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/confluentinc/confluent-kafka-go/kafka"
-	"github.com/golang/protobuf/proto"
+	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 	config "github.com/tommzn/go-config"
 	core "github.com/tommzn/hdb-core"
 	events "github.com/tommzn/hdb-events-go"
+	"google.golang.org/protobuf/proto"
 )
 
 const runes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

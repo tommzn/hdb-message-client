@@ -1,9 +1,9 @@
 package client
 
 import (
-	"github.com/golang/protobuf/proto"
 	metrics "github.com/tommzn/go-metrics"
 	core "github.com/tommzn/hdb-core"
+	"google.golang.org/protobuf/proto"
 )
 
 type Client interface {

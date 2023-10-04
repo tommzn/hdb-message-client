@@ -3,10 +3,10 @@ package client
 import (
 	"time"
 
-	"github.com/confluentinc/confluent-kafka-go/kafka"
-	"github.com/golang/protobuf/proto"
+	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 	log "github.com/tommzn/go-log"
 	core "github.com/tommzn/hdb-core"
+	"google.golang.org/protobuf/proto"
 )
 
 type MessageClient struct {

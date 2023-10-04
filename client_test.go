@@ -4,12 +4,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/stretchr/testify/suite"
 	"sync"
 	"testing"
 	"time"
 
-	"github.com/confluentinc/confluent-kafka-go/kafka"
+	"github.com/stretchr/testify/suite"
+
+	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 	"github.com/golang/protobuf/proto"
 	config "github.com/tommzn/go-config"
 	core "github.com/tommzn/hdb-core"
