@@ -82,6 +82,7 @@ func (client *MessageClient) fetchMessages() {
 
 	topics := topicsToSubscribe(client.subscriptions)
 	consumer.SubscribeTopics(topics, nil)
+	client.logger.Debugf("Subsribed to: %s", client.subscriptions)
 	for {
 
 		if msg, err := consumer.ReadMessage(client.fetchTimeout); err == nil {
