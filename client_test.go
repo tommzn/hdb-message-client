@@ -11,10 +11,10 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
-	"github.com/golang/protobuf/proto"
 	config "github.com/tommzn/go-config"
 	core "github.com/tommzn/hdb-core"
 	events "github.com/tommzn/hdb-events-go"
+	"google.golang.org/protobuf/proto"
 )
 
 type ClientTestSuite struct {

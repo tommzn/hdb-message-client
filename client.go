@@ -8,11 +8,11 @@ import (
 	"time"
 
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
-	"github.com/golang/protobuf/proto"
 	config "github.com/tommzn/go-config"
 	log "github.com/tommzn/go-log"
 	metrics "github.com/tommzn/go-metrics"
 	core "github.com/tommzn/hdb-core"
+	"google.golang.org/protobuf/proto"
 )
 
 var ErrNoNewEvents = errors.New("No new events available")

@@ -6,7 +6,6 @@ require (
 	github.com/aws/aws-lambda-go v1.41.0 // indirect
 	github.com/aws/aws-sdk-go v1.45.21 // indirect
 	github.com/confluentinc/confluent-kafka-go/v2 v2.2.0
-	github.com/golang/protobuf v1.5.3
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.1.0 // indirect
 	github.com/spf13/afero v1.10.0 // indirect
