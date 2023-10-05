@@ -54,13 +54,17 @@ func getSubscriptions(conf config.Config) map[string]processConfig {
 
 func newKafkaConfig(conf config.Config) *kafka.ConfigMap {
 
+	randId := randomId(6)
 	kafkaConfig := kafka.ConfigMap{
 		"bootstrap.servers": "localhost",
-		"group.id":          "hdb-message-client-" + randomId(6),
+		"group.id":          "hdb-message-client-" + randId,
 		"auto.offset.reset": "earliest",
 	}
 	if servers := conf.Get("kafka.servers", nil); servers != nil {
 		kafkaConfig.SetKey("bootstrap.servers", *servers)
+	}
+	if groupId := conf.Get("kafka.groupid", nil); groupId != nil {
+		kafkaConfig.SetKey("group.id", strings.ReplaceAll(*groupId, "[?]", randId))
 	}
 	return &kafkaConfig
 }

@@ -5,6 +5,7 @@ log:
 
 kafka:
   servers: 1.2.3.4
+  groupid: "test01-[?]"
   subsriptions:
     - topic: topic1
     - topic: topic2

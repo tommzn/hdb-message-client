@@ -1,9 +1,11 @@
 package client
 
 import (
-	"github.com/stretchr/testify/suite"
+	"strings"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/suite"
 
 	config "github.com/tommzn/go-config"
 	core "github.com/tommzn/hdb-core"
@@ -134,6 +136,11 @@ func (suite *UtilsTestSuite) TestGetKafkaConfig() {
 	val2, err2 := kafkaConfig2.Get("bootstrap.servers", nil)
 	suite.Nil(err2)
 	suite.Equal("1.2.3.4", val2.(string))
+
+	val3, err3 := kafkaConfig2.Get("group.id", nil)
+	suite.Nil(err3)
+	suite.True(strings.HasPrefix(val3.(string), "test01-"))
+	suite.Len(val3.(string), 13)
 }
 
 func (suite *UtilsTestSuite) TestGetSubscriptions() {
